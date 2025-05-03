@@ -1,0 +1,212 @@
+[
+  {
+    "day": "2025-01-01",
+    "type": "locked_profit_stop",
+    "result": 118.0897411047338
+  },
+  {
+    "day": "2025-01-02",
+    "type": "locked_profit_stop",
+    "result": 114.7850445060789
+  },
+  {
+    "day": "2025-01-03",
+    "type": "locked_profit_stop",
+    "result": 48.31392062919746
+  },
+  {
+    "day": "2025-01-04",
+    "type": "locked_profit_stop",
+    "result": 40.260365405468434
+  },
+  {
+    "day": "2025-01-05",
+    "type": "locked_profit_stop",
+    "result": 37.070263080986905
+  },
+  {
+    "day": "2025-01-06",
+    "type": "locked_profit_stop",
+    "result": 121.8604813636186
+  },
+  {
+    "day": "2025-01-07",
+    "type": "locked_profit_stop",
+    "result": 50.76609679680725
+  },
+  {
+    "day": "2025-01-08",
+    "type": "locked_profit_stop",
+    "result": 91.08376411709729
+  },
+  {
+    "day": "2025-01-09",
+    "type": "locked_profit_stop",
+    "result": 58.37783747690466
+  },
+  {
+    "day": "2025-01-10",
+    "type": "locked_profit_stop",
+    "result": 81.8851787108804
+  },
+  {
+    "day": "2025-01-11",
+    "type": "locked_profit_stop",
+    "result": 68.29967354799994
+  },
+  {
+    "day": "2025-01-12",
+    "type": "locked_profit_stop",
+    "result": 41.38812037031308
+  },
+  {
+    "day": "2025-01-13",
+    "type": "locked_profit_stop",
+    "result": 186.2530624122818
+  },
+  {
+    "day": "2025-01-14",
+    "type": "locked_profit_stop",
+    "result": 81.6385116621338
+  },
+  {
+    "day": "2025-01-15",
+    "type": "locked_profit_stop",
+    "result": 105.31067565556891
+  },
+  {
+    "day": "2025-01-16",
+    "type": "locked_profit_stop",
+    "result": 51.46757427718713
+  },
+  {
+    "day": "2025-01-17",
+    "type": "locked_profit_stop",
+    "result": 236.5167667489584
+  },
+  {
+    "day": "2025-01-18",
+    "type": "locked_profit_stop",
+    "result": 73.61072247790227
+  },
+  {
+    "day": "2025-01-19",
+    "type": "locked_profit_stop",
+    "result": 85.93756169246755
+  },
+  {
+    "day": "2025-01-20",
+    "type": "locked_profit_stop",
+    "result": 182.76927470792702
+  },
+  {
+    "day": "2025-01-21",
+    "type": "locked_profit_stop",
+    "result": 279.8663487963355
+  },
+  {
+    "day": "2025-01-22",
+    "type": "locked_profit_stop",
+    "result": 119.37869912411276
+  },
+  {
+    "day": "2025-01-23",
+    "type": "locked_profit_stop",
+    "result": 138.2356884174094
+  },
+  {
+    "day": "2025-01-24",
+    "type": "locked_profit_stop",
+    "result": 111.16871685204259
+  },
+  {
+    "day": "2025-01-25",
+    "type": "locked_profit_stop",
+    "result": 55.570895005500496
+  },
+  {
+    "day": "2025-01-26",
+    "type": "locked_profit_stop",
+    "result": 34.26649971134675
+  },
+  {
+    "day": "2025-01-27",
+    "type": "locked_profit_stop",
+    "result": 120.57831609782312
+  },
+  {
+    "day": "2025-01-28",
+    "type": "locked_profit_stop",
+    "result": 81.16301370663564
+  },
+  {
+    "day": "2025-01-29",
+    "type": "locked_profit_stop",
+    "result": 69.98507390942247
+  },
+  {
+    "day": "2025-01-30",
+    "type": "locked_profit_stop",
+    "result": 80.80206087111559
+  },
+  {
+    "day": "2025-01-31",
+    "type": "locked_profit_stop",
+    "result": 62.22069529593737
+  },
+  {
+    "day": "2025-02-01",
+    "type": "locked_profit_stop",
+    "result": 41.66789109522336
+  },
+  {
+    "day": "2025-02-02",
+    "type": "locked_profit_stop",
+    "result": 38.45355840019428
+  },
+  {
+    "day": "2025-02-03",
+    "type": "locked_profit_stop",
+    "result": 703.6564429556342
+  },
+  {
+    "day": "2025-02-04",
+    "type": "locked_profit_stop",
+    "result": 130.6628402945035
+  },
+  {
+    "day": "2025-02-05",
+    "type": "locked_profit_stop",
+    "result": 172.63913420947173
+  },
+  {
+    "day": "2025-02-06",
+    "type": "locked_profit_stop",
+    "result": 79.88753308781173
+  },
+  {
+    "day": "2025-02-07",
+    "type": "locked_profit_stop",
+    "result": 179.0849803625069
+  },
+  {
+    "day": "2025-02-08",
+    "type": "locked_profit_stop",
+    "result": 54.583959172315076
+  },
+  {
+    "day": "2025-02-09",
+    "type": "locked_profit_stop",
+    "result": 70.25186015947622
+  },
+  {
+    "day": "2025-02-10",
+    "type": "locked_profit_stop",
+    "result": 219.83708021248893
+  },
+  {
+    "day": "2025-02-11",
+    "type": "locked_profit_stop",
+    "result": 43.24143577913292
+  }
+]

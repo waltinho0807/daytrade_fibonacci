@@ -1,0 +1,20 @@
+{
+  "name": "fibonacci_daytrade",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ccxt": "^4.4.77",
+    "dotenv": "^16.5.0",
+    "fs": "^0.0.1-security",
+    "mongoose": "^8.14.0",
+    "node-cron": "^3.0.3"
+  }
+}
