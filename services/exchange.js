@@ -32,3 +32,18 @@ export async function placeMarketBuy(symbol, amount) {
 export async function placeMarketSell(symbol, amount) {
   return await exchange.createMarketSellOrder(symbol, amount);
 }
+
+export async function placeLimitBuy(symbol, price, amount) {
+  const roundedPrice = parseFloat(price.toFixed(2)); // Ajuste baseado no par (ex: 2 casas para USDT pairs)
+  return await exchange.createLimitBuyOrder(symbol, amount, roundedPrice);
+}
+
+export async function placeLimitSell(symbol, price, amount) {
+  const roundedPrice = parseFloat(price.toFixed(2));
+  return await exchange.createLimitSellOrder(symbol, amount, roundedPrice);
+}
+
+export async function checkOrderStatus(orderId, symbol) {
+  return await exchange.fetchOrder(orderId, symbol);
+}
+

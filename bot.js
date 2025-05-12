@@ -56,13 +56,26 @@ cron.schedule('* * * * *', async () => {
 
     // Entrada
     if (operation.status === 'waiting' && price <= operation.fibonacciLevels.entry) {
-      await placeMarketBuy(config.symbol, config.riskAmount / price);
-      operation.status = 'opened';
-      operation.entryPrice = price;
-      operation.timestampEntry = now;
+      const order = await placeLimitBuy(config.symbol, operation.fibonacciLevels.entry, config.riskAmount / operation.fibonacciLevels.entry); // ✅ atribuição feita aqui
+      operation.status = 'pending';
+      operation.orderId = order.id;
       await operation.save();
-      return console.log("✅ Compra realizada a", price);
+      return console.log(`📝 Ordem LIMIT de compra enviada a ${operation.fibonacciLevels.entry}`);
     }
+    
+
+    if (operation.status === 'pending') {
+      const order = await checkOrderStatus(operation.orderId, config.symbol);
+      if (order.status === 'closed') {
+        operation.status = 'opened';
+        operation.entryPrice = order.average || order.price;
+        operation.timestampEntry = now;
+        await operation.save();
+        return console.log(`✅ Ordem LIMIT executada a ${operation.entryPrice}`);
+      }
+      return console.log("⌛ Aguardando execução da ordem LIMIT...");
+    }
+    
 
     // Break-even
     if (
@@ -70,7 +83,8 @@ cron.schedule('* * * * *', async () => {
       !operation.breakEvenMoved &&
       price >= operation.fibonacciLevels.fib100
     ) {
-      operation.fibonacciLevels.sl = operation.fibonacciLevels.fib0718;
+      const adjustedBreakEven = operation.fibonacciLevels.fib0718 * 1.002;
+      operation.fibonacciLevels.sl = adjustedBreakEven;
       operation.breakEvenMoved = true;
       await operation.save();
       console.log("🔁 Stop movido para break-even (fib0718)");
@@ -78,7 +92,7 @@ cron.schedule('* * * * *', async () => {
 
     // Saída por TP
     if (operation.status === 'opened' && price >= operation.fibonacciLevels.tp) {
-      await placeMarketSell(config.symbol, config.riskAmount / operation.entryPrice);
+      await placeLimitSell(config.symbol, operation.fibonacciLevels.tp, config.riskAmount / operation.entryPrice);
       operation.status = 'closed_tp';
       operation.exitPrice = price;
       operation.timestampExit = now;
@@ -88,7 +102,7 @@ cron.schedule('* * * * *', async () => {
 
     // Saída por SL
     if (operation.status === 'opened' && price <= operation.fibonacciLevels.sl) {
-      await placeMarketSell(config.symbol, config.riskAmount / operation.entryPrice);
+      await placeLimitSell(config.symbol, operation.fibonacciLevels.sl, config.riskAmount / operation.entryPrice);
       operation.status = 'closed_sl';
       operation.exitPrice = price;
       operation.timestampExit = now;

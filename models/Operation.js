@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const operationSchema = new mongoose.Schema({
+  orderId: String,
   date: { type: String, required: true },
   fibonacciLevels: {
     entry: Number,
