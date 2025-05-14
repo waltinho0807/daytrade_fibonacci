@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { config } from './config.js';
 import Operation from './models/Operation.js';
-import { fetchOHLCV, getCurrentPrice, placeMarketBuy, placeMarketSell } from './services/exchange.js';
+import { fetchOHLCV, getCurrentPrice, placeLimitBuy, placeMarketSell, checkOrderStatus, placeLimitSell } from './services/exchange.js';
 import { calculateFibonacci } from './utils/fibonacci.js';
 
 dotenv.config();
