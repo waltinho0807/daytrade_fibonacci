@@ -21,17 +21,36 @@ cron.schedule('* * * * *', async () => {
     // Criar operação do dia
     if (!operation) {
       const candles = await fetchOHLCV(config.symbol, config.timeframe);
-      const currentDateUTC = new Date().toISOString().split('T')[0];
 
-      const candle0100 = candles.find(c => {
-      const candleDate = new Date(c.time);
-      const candleDateUTC = candleDate.toISOString().split('T')[0];
-      return candleDateUTC === currentDateUTC && candleDate.getUTCHours() === 1;
-    });
+      // 🔍 Remove a última vela (que ainda está em formação)
+      const previousCandles = candles.slice(0, -1);
 
-    if (!candle0100) return console.log("⏳ Aguardando vela de 01:00");
+      const now = new Date();
+      const currentDateUTC = now.toISOString().split('T')[0];
+      
+      // 🔎 Encontra a vela de 01:00 UTC
+      const candle0100 = previousCandles.find(c => {
+        const candleDate = new Date(c.time);
+        const candleDateStr = candleDate.toISOString().split('T')[0];
+        return (
+          candleDate.getUTCHours() === 1 &&
+          candleDateStr === currentDateUTC
+        );
+      });
 
-    if (!candle0100) return console.log("⏳ Aguardando vela de 01:00");
+     
+    if (!candle0100) {
+      /*candles.forEach(c => {
+        const candleDate = new Date(c.time);
+        console.log(`🕯 Vela: ${candleDate.toISOString()} | Open: ${c.open} | High: ${c.high} | Low: ${c.low} | Close: ${c.close}`);
+      });*/
+      return console.log("⏳ Aguardando vela de 01:00 fechada");
+    }
+    
+    // ✅ Verificação de sanidade dos dados
+    if (candle0100.high === candle0100.low) {
+      return console.log("⚠️ Candle inválido: high igual a low");
+    }
 
       //✅ Log para comparação com a vela da Binance
         console.log(`🕐 Candle 01:00 UTC:
@@ -41,15 +60,15 @@ cron.schedule('* * * * *', async () => {
           🔻 Low: ${candle0100.low}
           📦 Volume: ${candle0100.volume}`);
 
-      const levels = calculateFibonacci(candle0100.high, candle0100.low);
-      operation = await Operation.create({
-        date: currentDate,
-        fibonacciLevels: levels,
-        breakEvenMoved: false
-      });
-
-      console.log("📊 Fibonacci traçado:", levels);
-      return;
+          const levels = calculateFibonacci(candle0100.high, candle0100.low);
+          operation = await Operation.create({
+            date: currentDate,
+            fibonacciLevels: levels,
+            breakEvenMoved: false
+          });
+        
+          console.log("📊 Fibonacci traçado:", levels);
+          return;
     }
 
     const price = await getCurrentPrice(config.symbol);
@@ -66,13 +85,17 @@ cron.schedule('* * * * *', async () => {
 
     if (operation.status === 'pending') {
       const order = await checkOrderStatus(operation.orderId, config.symbol);
-      if (order.status === 'closed') {
+      if (order && order.status === 'closed') {
         operation.status = 'opened';
         operation.entryPrice = order.average || order.price;
         operation.timestampEntry = now;
         await operation.save();
         return console.log(`✅ Ordem LIMIT executada a ${operation.entryPrice}`);
       }
+      if (!order) {
+         return console.log("❌ Erro ao verificar a ordem. Aguardando próximo ciclo...");
+      }
+
       return console.log("⌛ Aguardando execução da ordem LIMIT...");
     }
     

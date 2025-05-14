@@ -44,6 +44,16 @@ export async function placeLimitSell(symbol, price, amount) {
 }
 
 export async function checkOrderStatus(orderId, symbol) {
-  return await exchange.fetchOrder(orderId, symbol);
+  try {
+    const order = await exchange.fetchOrder(orderId, symbol);
+
+    console.log(`📦 Status da ordem ${orderId}: ${order.status}`);
+    
+    return order;
+  } catch (error) {
+    console.error(`❌ Erro ao buscar status da ordem ${orderId}: ${error.message}`);
+    return null; // retorna null se houve erro
+  }
 }
+
 
